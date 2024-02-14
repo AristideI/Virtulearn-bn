@@ -9,13 +9,13 @@ export default class BlogDto {
   @IsString()
   secondImg: string;
   @IsString()
-  content: string[];
+  content: string;
 }
 
 export interface BlogProps {
   coverImg: string;
   authorId: number;
   secondImg: string;
-  content: string[];
+  content: string;
   discussion: Discussion[];
 }
