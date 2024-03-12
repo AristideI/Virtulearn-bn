@@ -4,6 +4,8 @@ import { connectDB } from "./db/connectDB.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRouter from "./routes/auth.routes.js";
+import userRouter from "./routes/user.routes.js";
+import discussionRouter from "./routes/discussion.routes.js";
 
 // config Consts
 const app = express();
@@ -20,6 +22,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
+app.use("/discussion", discussionRouter);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
