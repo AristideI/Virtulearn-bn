@@ -1,9 +1,17 @@
 import express from "express";
+import {
+  getAll,
+  getDiscussionById,
+  create,
+  likeDiscussion,
+} from "../controllers/discussion.controller.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({ message: "Welcome to the discussion route" });
-});
+//create a new discussion
+router.post("/", create);
+
+//like a discussion
+router.post("/:id/like", likeDiscussion);
 
 export default router;

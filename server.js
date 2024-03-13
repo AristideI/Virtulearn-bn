@@ -23,14 +23,13 @@ app.get("/", (req, res) => {
   return res.status(200).json({ done: true });
 });
 
-// Routes
-//  /auth
+//  auth routes
 app.use("/auth", authRouter);
 
-//  /user
+//  users routes
 app.use("/user", validateToken, userRouter);
 
-//  /discussion
+//  discussion routes
 app.use("/discussion", validateToken, discussionRouter);
 
 const port = process.env.PORT || 4000;
