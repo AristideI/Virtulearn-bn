@@ -5,7 +5,7 @@ const DiscussionSchema = new Schema({
     type: String,
     required: true,
   },
-  auther: {
+  author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
