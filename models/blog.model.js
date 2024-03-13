@@ -14,14 +14,12 @@ const blogSchema = new Schema(
       required: true,
     },
     authorId: {
-      type: String,
-      // type: Schema.Types.ObjectId,
-      // ref: "User",
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
     discussion: {
-      type: String,
-      // type: Schema.Types.Array,
-      // ref: "Discussion",
+      type: Schema.Types.Array,
+      ref: "Discussion",
     },
   },
   {
