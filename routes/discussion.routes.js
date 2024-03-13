@@ -1,7 +1,5 @@
 import express from "express";
 import {
-  getAll,
-  getDiscussionById,
   create,
   likeDiscussion,
 } from "../controllers/discussion.controller.js";

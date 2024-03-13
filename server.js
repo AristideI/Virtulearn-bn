@@ -28,10 +28,10 @@ app.get("/", (req, res) => {
 app.use("/auth", authRouter);
 
 //  users routes
-app.use("/user", validateToken, userRouter);
+app.use("/users", validateToken, userRouter);
 
 //  discussion routes
-app.use("/discussion", validateToken, discussionRouter);
+app.use("/discussions", validateToken, discussionRouter);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {

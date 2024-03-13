@@ -1,3 +1,5 @@
+import User from "../models/user.model.js";
+
 export async function getAllUsers(req, res) {
   try {
     // Get current user from validateToken.js

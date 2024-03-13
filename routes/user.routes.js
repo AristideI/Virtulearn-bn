@@ -8,7 +8,6 @@ import {
 
 const router = express.Router();
 
-// Routes
 //  /user/all
 router.get("/all", getAllUsers);
 
