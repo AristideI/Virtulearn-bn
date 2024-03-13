@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
-export default async function checkAuth(req, res, next) {
+export default async function validateToken(req, res, next) {
   try {
     const authHeader = req.headers.authorization;
 
@@ -36,6 +36,8 @@ export default async function checkAuth(req, res, next) {
     }
 
     req.user = currentUser;
+
+    next();
   } catch (error) {
     console.log("Error: ", error.message);
     res.status(500).json({ error: "Internal server error" });
