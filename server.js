@@ -4,6 +4,7 @@ import { connectDB } from "./db/connectDB.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRouter from "./routes/auth.routes.js";
+import blogRouter from "./routes/blog.routes.js"
 
 // config Consts
 const app = express();
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/blogs",blogRouter)
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
