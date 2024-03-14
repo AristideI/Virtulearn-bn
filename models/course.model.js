@@ -1,25 +1,27 @@
 import { Schema, model } from "mongoose";
 
-const courseSchema = new Schema({
-  authorId: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+const courseSchema = new Schema(
+  {
+    authorId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    coverImage: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: Schema.Types.Array,
+      ref: "Content",
+    },
+    students: {
+      type: Schema.Types.Array,
+      ref: "User",
+    },
   },
-  coverImage: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type:Schema.Types.Array,
-    ref: 'Content'
-  },
-  students:{
-    type:Schema.Types.Array,
-    ref: 'User'
-  },
-  
-},{
-    timestamps:true
-});
+  {
+    timestamps: true,
+  }
+);
 
-export const Course = model('Course',courseSchema)
+export const Course = model("Course", courseSchema);

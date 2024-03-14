@@ -4,7 +4,7 @@ import { connectDB } from "./db/connectDB.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRouter from "./routes/auth.routes.js";
-
+import courseRouter from './routes/course.routes.js'
 // config Consts
 const app = express();
 
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRouter);
-
+app.use("/course",courseRouter)
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
