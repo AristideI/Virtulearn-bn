@@ -10,6 +10,6 @@ const router = express.Router();
 router.post("/", create);
 
 //like a discussion
-router.post("/:id/like", likeDiscussion);
+router.patch("/:id", likeDiscussion);
 
 export default router;
