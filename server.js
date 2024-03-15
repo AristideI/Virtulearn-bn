@@ -4,6 +4,7 @@ import { connectDB } from "./db/connectDB.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRouter from "./routes/auth.routes.js";
+import contentRouter from "./routes/content.routes.js";
 import courseRouter from './routes/course.routes.js'
 import userRouter from "./routes/user.routes.js";
 import discussionRouter from "./routes/discussion.routes.js";
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 
 //  auth routes
 app.use("/auth", authRouter);
+app.use("/content", contentRouter);
 app.use("/course",courseRouter)
 
 //  users routes
