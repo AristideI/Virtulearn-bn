@@ -17,10 +17,13 @@ const blogSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    discussion: {
-      type: Schema.Types.Array,
-      ref: "Discussion",
-    },
+    discussions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Discussion",
+        default: [],
+      },
+    ],
   },
   {
     timestamps: true,
@@ -28,4 +31,4 @@ const blogSchema = new Schema(
 );
 
 const Blog = model("Blog", blogSchema);
-export default Blog
+export default Blog;

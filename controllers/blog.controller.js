@@ -1,34 +1,61 @@
 import Blog from "../models/blog.model.js";
-export function getAllBlogs(req, res) {
-  Blog.find()
-    .sort({ createdAt: -1 })
-    .then((result) => {
-      res.status(200).json(result);
-    });
+
+export async function getAllBlogs(req, res) {
+  try {
+    const blogs = await Blog.find();
+    return res.status(200).json(blogs);
+  } catch (error) {
+    console.log("Error: ", error.message);
+    res.status(500).json({ error: "Internal server Error" });
+  }
 }
 
-export function getBlog(req, res) {
-  Blog.findById(req.params.id)
-    .then((blog) => {
-      res.status(200).json(blog);
-    })
-    .catch(() => {
-      res.status(404).json({ error: "Blog not found" });
-    });
+export async function getBlog(req, res) {
+  try {
+    const blogId = req.params.id;
+    const blog = await Blog.findById(blogId);
+    if (!blog) {
+      return res.status(404).json({ error: "Blog not found" });
+    }
+    return res.status(200).json(blog);
+  } catch (error) {
+    console.log("Error: ", error.message);
+    res.status(500).json({ error: "Internal server Error" });
+  }
 }
-export function createBlog(req, res) {
-  const blog = new Blog(req.body);
-  blog.save().then((data) => {
-    res.status(200).json(data);
-  });
-}
-export function deleteBlog(req, res) {
-  Blog.findByIdAndDelete(req.params.id)
-    .then((result) => {
-      res.status(200).json("Deleted a blog successfully");
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(404).json({ error: "Blog not found" });
+export async function createBlog(req, res) {
+  try {
+    const authorId = req.user._id;
+    const { title, coverImage, content } = req.body;
+    if (!title || !coverImage || !content || !authorId) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+    const blog = await Blog.create({
+      title,
+      coverImage,
+      content,
+      authorId,
     });
+    return res.status(201).json(blog);
+  } catch (error) {
+    console.log("Error: ", error.message);
+    return res.status(500).json({ error: "Internal server Error" });
+  }
+}
+export async function deleteBlog(req, res) {
+  try {
+    const blogId = req.params.id;
+    const blog = await Blog.findById(blogId);
+    if (!blog) {
+      return res.status(404).json({ error: "Blog not found" });
+    }
+    if (blog.authorId.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    await blog.delete();
+    return res.status(200).json({ message: "Blog deleted successfully" });
+  } catch (error) {
+    console.log("Error: ", error.message);
+    return res.status(500).json({ error: "Internal server Error" });
+  }
 }

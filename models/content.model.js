@@ -11,4 +11,6 @@ const contentSchema = new Schema({
   },
 });
 
-export const Content = model("Content", contentSchema);
+const Content = model("Content", contentSchema);
+
+export default Content;

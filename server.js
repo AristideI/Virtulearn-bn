@@ -5,10 +5,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRouter from "./routes/auth.routes.js";
 
-import blogRouter from "./routes/blog.routes.js"
+import blogRouter from "./routes/blog.routes.js";
 
 import contentRouter from "./routes/content.routes.js";
-import courseRouter from './routes/course.routes.js'
+import courseRouter from "./routes/course.routes.js";
 import userRouter from "./routes/user.routes.js";
 import discussionRouter from "./routes/discussion.routes.js";
 import validateToken from "./guards/validateToken.js";
@@ -31,9 +31,9 @@ app.get("/", (req, res) => {
 
 //  auth routes
 app.use("/auth", authRouter);
-app.use("/blogs",blogRouter)
-app.use("/content", contentRouter);
-app.use("/course",courseRouter)
+app.use("/blogs", validateToken, blogRouter);
+app.use("/content", validateToken, contentRouter);
+app.use("/course", validateToken, courseRouter);
 
 //  users routes
 app.use("/users", validateToken, userRouter);

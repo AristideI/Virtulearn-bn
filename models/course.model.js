@@ -10,18 +10,33 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
-    content: {
-      type: Schema.Types.Array,
-      ref: "Content",
-    },
-    students: {
-      type: Schema.Types.Array,
-      ref: "User",
-    },
+    content: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Content",
+        default: [],
+      },
+    ],
+    students: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
+    discussions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Discussion",
+        default: [],
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-export const Course = model("Course", courseSchema);
+const Course = model("Course", courseSchema);
+
+export default Course;
