@@ -1,4 +1,4 @@
-import { Blog } from "../models/blog.model.js";
+import Blog from "../models/blog.model.js";
 export function getAllBlogs(req, res) {
   Blog.find()
     .sort({ createdAt: -1 })
@@ -13,7 +13,7 @@ export function getBlog(req, res) {
       res.status(200).json(blog);
     })
     .catch(() => {
-      res.status(404).json({error:'Blog not found'})
+      res.status(404).json({ error: "Blog not found" });
     });
 }
 export function createBlog(req, res) {
@@ -23,11 +23,12 @@ export function createBlog(req, res) {
   });
 }
 export function deleteBlog(req, res) {
-  Blog.findByIdAndDelete(req.params.id).then((result) => {
-    res.status(200).json("Deleted a blog successfully");
-    
-  }).catch(err=>{
-    console.log(err)
-    res.status(404).json({error: "Blog not found"})
-  })
+  Blog.findByIdAndDelete(req.params.id)
+    .then((result) => {
+      res.status(200).json("Deleted a blog successfully");
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).json({ error: "Blog not found" });
+    });
 }
