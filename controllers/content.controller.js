@@ -2,10 +2,8 @@ import Content from "../models/content.model.js";
 
 export async function getAllContent(req, res) {
   try {
-    // Content.find().then((result) => {
-    //   res.status(200).json(result);
-    // });
     const content = await Content.find();
+    return res.status(200).json(content);
   } catch (error) {
     console.log("Error: ", error.message);
     return res.status(500).json({ error: "Internal server Error" });
