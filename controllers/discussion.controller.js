@@ -1,9 +1,11 @@
 import Discussion from "../models/discussion.model.js";
 import Blog from "../models/blog.model.js";
+import Course from "../models/course.model.js";
 
 // create a new discussion
-export async function create(req, res) {
-  const { content, blogId } = req.body;
+export async function createBlogDiscussion(req, res) {
+  const blogId = req.params.id;
+  const { content } = req.body;
   const authorId = req.user._id;
 
   try {
@@ -21,6 +23,37 @@ export async function create(req, res) {
     // save the discussion in the blog
     blog.discussions.push(savedDiscussion._id);
     await blog.save();
+
+    // return the saved discussion
+    return res.status(201).json(savedDiscussion);
+  } catch (error) {
+    console.log("Error", error);
+    return res.status(500).json({ error: "Internal server Error" });
+  }
+}
+
+// create course discussion
+export async function createCourseDiscussion(req, res) {
+  const courseId = req.params.id;
+  const { content } = req.body;
+  const authorId = req.user._id;
+
+  try {
+    // check if the Course exists
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res.status(404).json({ error: "Course not found" });
+    }
+
+    // create a new discussion
+    const newDiscussion = await Discussion.create({
+      content,
+      author: authorId,
+    });
+
+    // save the discussion in the Course
+    course.discussions.push(savedDiscussion._id);
+    await course.save();
 
     // return the saved discussion
     return res.status(201).json(savedDiscussion);
