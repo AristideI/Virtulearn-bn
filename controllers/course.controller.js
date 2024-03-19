@@ -12,6 +12,7 @@ export function getCourse(req, res) {
     })
     .catch(() => res.status(404).json({ error: "Course not found" }));
 }
+
 export function createCourse(req, res) {
   const course = new Course(req.body);
   course.save().then((data) => res.status(200).json(data));

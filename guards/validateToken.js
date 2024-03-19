@@ -14,10 +14,6 @@ export default async function validateToken(req, res, next) {
     const token = authHeader.split(" ")[1];
 
     if (!token) {
-      return res.status(401).json({ error: "You are not authorized" });
-    }
-
-    if (!token) {
       return res
         .status(401)
         .json({ error: "Unauthorised - No token provided" });
