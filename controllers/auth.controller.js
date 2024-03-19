@@ -73,7 +73,7 @@ export async function login(req, res) {
     //Check if the password is valid
     const isPasswordValid = await bcrypt.compare(
       password,
-      currentUser.password || ""
+      currentUser.password
     );
 
     if (!isPasswordValid) {
