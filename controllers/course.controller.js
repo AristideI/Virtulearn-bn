@@ -10,7 +10,7 @@ export function getCourse(req, res) {
     .then((result) => {
       res.status(200).json(result);
     })
-    .catch(() => res.status(400).json({ error: "Course not found" }));
+    .catch(() => res.status(404).json({ error: "Course not found" }));
 }
 export function createCourse(req, res) {
   const course = new Course(req.body);
@@ -20,5 +20,5 @@ export function createCourse(req, res) {
 export function deleteCourse(req, res) {
   Course.findByIdAndDelete(req.params.id)
     .then(() => res.status(200).json("Deleted a course successfully"))
-    .catch(() => res.status(400).json({ error: "Course not found" }));
+    .catch(() => res.status(404).json({ error: "Course not found" }));
 }
