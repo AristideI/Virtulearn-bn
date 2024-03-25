@@ -3,18 +3,16 @@ import dotenv from "dotenv";
 import { connectDB } from "./db/connectDB.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+
 import authRouter from "./routes/auth.routes.js";
-
 import blogRouter from "./routes/blog.routes.js";
-
 import contentRouter from "./routes/content.routes.js";
 import courseRouter from "./routes/course.routes.js";
 import userRouter from "./routes/user.routes.js";
 import discussionRouter from "./routes/discussion.routes.js";
+import messageRouter from "./routes/messages.routes.js";
 import validateToken from "./guards/validateToken.js";
-
-// config Consts
-const app = express();
+import { app, server } from "./socket/socket.js";
 
 // Config
 dotenv.config();
@@ -34,6 +32,7 @@ app.use("/auth", authRouter);
 app.use("/blogs", validateToken, blogRouter);
 app.use("/content", validateToken, contentRouter);
 app.use("/course", validateToken, courseRouter);
+app.use("/messages", validateToken, messageRouter);
 
 //  users routes
 app.use("/users", validateToken, userRouter);
@@ -42,7 +41,7 @@ app.use("/users", validateToken, userRouter);
 app.use("/discussions", validateToken, discussionRouter);
 
 const port = process.env.PORT || 4000;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
   connectDB();
 });
