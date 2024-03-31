@@ -6,6 +6,10 @@ const courseSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    title: {
+      type: String,
+      required: true,
+    },
     coverImage: {
       type: String,
       required: true,

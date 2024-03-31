@@ -34,8 +34,8 @@ export async function getCourse(req, res) {
 export async function createCourse(req, res) {
   try {
     const authorId = req.user._id;
-    const { coverImage, content } = req.body;
-    const course = await Course.create({ authorId, coverImage });
+    const { coverImage, content, title } = req.body;
+    const course = await Course.create({ authorId, coverImage, title });
     const contents = await Content.insertMany(content);
     course.content = contents.map((content) => content._id);
     course.save();
