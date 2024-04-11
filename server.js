@@ -29,16 +29,18 @@ app.get("/", (req, res) => {
 
 //  auth routes
 app.use("/auth", authRouter);
-app.use("/blogs", validateToken, blogRouter);
-app.use("/content", validateToken, contentRouter);
-app.use("/course", validateToken, courseRouter);
-app.use("/messages", validateToken, messageRouter);
-
-//  users routes
 app.use("/users", validateToken, userRouter);
 
-//  discussion routes
+// blog routes
+app.use("/blogs", validateToken, blogRouter);
 app.use("/discussions", validateToken, discussionRouter);
+
+// courses routes
+app.use("/course", validateToken, courseRouter);
+app.use("/content", validateToken, contentRouter);
+
+// messages routes
+app.use("/messages", validateToken, messageRouter);
 
 const port = process.env.PORT || 4000;
 server.listen(port, () => {
