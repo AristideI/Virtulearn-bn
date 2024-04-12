@@ -6,6 +6,7 @@ import {
   getBlog,
   updateBlog,
 } from "../controllers/blog.controller.js";
+import validateToken from "../guards/validateToken.js";
 
 const router = Router();
 
