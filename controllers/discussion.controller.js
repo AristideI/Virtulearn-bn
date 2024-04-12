@@ -21,11 +21,11 @@ export async function createBlogDiscussion(req, res) {
       author: authorId,
     });
     // save the discussion in the blog
-    blog.discussions.push(savedDiscussion._id);
+    blog.discussions.push(newDiscussion._id);
     await blog.save();
 
     // return the saved discussion
-    return res.status(201).json(savedDiscussion);
+    return res.status(201).json(newDiscussion);
   } catch (error) {
     console.log("Error", error);
     return res.status(500).json({ error: "Internal server Error" });
