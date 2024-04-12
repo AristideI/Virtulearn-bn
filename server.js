@@ -32,7 +32,7 @@ app.use("/auth", authRouter);
 app.use("/users", validateToken, userRouter);
 
 // blog routes
-app.use("/blogs", validateToken, blogRouter);
+app.use("/blogs", blogRouter);
 app.use("/discussions", validateToken, discussionRouter);
 
 // courses routes
