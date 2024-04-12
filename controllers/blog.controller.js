@@ -13,10 +13,10 @@ export async function getAllBlogs(req, res) {
 export async function getBlog(req, res) {
   try {
     const blogId = req.params.id;
-    const blog = await Blog.findById(blogId).populate(
-      "discussions",
-      "authorId"
-    );
+    const blog = await Blog.findById(blogId)
+      .populate("discussions")
+      .populate("authorId")
+      .select("-authorId.password");
     if (!blog) {
       return res.status(404).json({ error: "Blog not found" });
     }
