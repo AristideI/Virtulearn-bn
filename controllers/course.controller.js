@@ -64,3 +64,21 @@ export async function deleteCourse(req, res) {
     return res.status(500).json({ error: "Internal server Error" });
   }
 }
+
+export async function enrollCourse(req, res) {
+  try {
+    const course = await Course.findById(req.params.id);
+    if (!course) {
+      return res.status(404).json({ error: "Course not found" });
+    }
+    if (course.students.includes(req.user._id)) {
+      return res.status(400).json({ error: "You are already enrolled" });
+    }
+    course.students.push(req.user._id);
+    course.save();
+    return res.status(200).json({ message: "Enrolled successfully" });
+  } catch (error) {
+    console.log("Error: ", error.message);
+    return res.status(500).json({ error: "Internal server Error" });
+  }
+}

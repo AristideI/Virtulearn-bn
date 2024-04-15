@@ -4,12 +4,14 @@ import {
   deleteCourse,
   getAllCourses,
   getCourse,
-} from "../controllers/course.controller.js"
+  enrollCourse,
+} from "../controllers/course.controller.js";
 
 const router = Router();
 
 router.get("/", getAllCourses);
 router.get("/:id", getCourse);
 router.post("/", createCourse);
+router.post("/enroll/:id", enrollCourse);
 router.delete("/:id", deleteCourse);
 export default router;
