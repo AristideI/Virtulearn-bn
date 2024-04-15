@@ -6,9 +6,7 @@ export async function getAllUsers(req, res) {
     const currentUser = req.user._id;
 
     // Get all users except the current user
-    const users = await User.find({ _id: { $ne: currentUser } }).select(
-      "-password"
-    );
+    const users = await User.find().select("-password");
 
     // Return all users
     return res.status(200).json(users);
