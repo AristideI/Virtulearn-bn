@@ -57,3 +57,24 @@ export async function getOneUser(req, res) {
     return res.status(500).json({ error: "Internal server error" });
   }
 }
+
+export async function updateProgress(req, res) {
+  try {
+    const { courseId } = req.params;
+    const userId = req.user._id;
+
+    const user = await User.findById(userId);
+
+    const courseProgress = user.courseProgresses.find(
+      (progress) => progress.courseId.toString() === courseId
+    );
+    courseProgress.completedLessons += 1;
+    await user.save();
+
+    // Return updated user
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log("Error: ", error.message);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}

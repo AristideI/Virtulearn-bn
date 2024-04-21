@@ -76,6 +76,10 @@ export async function enrollCourse(req, res) {
     }
     course.students.push(req.user._id);
     course.save();
+    const user = await User.findById(req.user._id);
+    user.courseProgresses.push({ courseId: course._id });
+    user.save();
+
     return res.status(200).json({ message: "Enrolled successfully" });
   } catch (error) {
     console.log("Error: ", error.message);

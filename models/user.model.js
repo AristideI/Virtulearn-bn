@@ -19,10 +19,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  courses: [
+  courseProgresses: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Course",
+      ref: "CourseProgress",
     },
   ],
   profilePicture: {
